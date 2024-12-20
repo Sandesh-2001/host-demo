@@ -1,0 +1,19 @@
+<!-- <app-map></app-map> -->
+<input type="text" [(ngModel)]="name.first" />
+<button type="button" (click)="changeFirstName()">Chagne first name</button>
+<button type="button" (click)="isLifeComp = !isLifeComp">Destroy comp</button>
+
+@if(isLifeComp){
+
+<app-life-cycle-hooks [name]="name"></app-life-cycle-hooks>
+}
+
+<!-- <app-udemy-practice></app-udemy-practice>
+ <app-data-sharing [name]="'sandesh'" (name)="getName($event)"></app-data-sharing>
+<app-data-sharing [name]="'sandesh'" (name)="getName($event)"></app-data-sharing>
+<app-data-sharing [name]="'sandesh'" (name)="getName($event)"></app-data-sharing>
+
+<button (click)="logMsg()" #log>log</button>
+<button (click)="logMsg()" #log>log</button>
+<button (click)="logMsg()" #log>log</button>
+<router-outlet></router-outlet>  -->

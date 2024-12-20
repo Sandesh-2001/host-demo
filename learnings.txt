@@ -1,0 +1,85 @@
+// console.log('ngoninti');
+    // this.normalizeUserError(
+    //   of([{ name: 'sandesh', age: 12, id: '1', isActive: true }])
+    // ).subscribe({
+    //   next: (res) => {
+    //     console.log('response===>', res);
+    //   },
+    //   error(err) {
+    //     console.log('error sub', err);
+    //   },
+    // });
+    // // this.normalizeUsers(this.users$).subscribe((data) => {
+    // //   console.log('data=================+>>>>>>>>', data);
+    // // });
+
+
+// normalizeUsers(users$: Observable<UserInterface[]>): Observable<unknown> {
+  //   //how map works in rxjs
+  //   // return users$.pipe(
+  //   //   map((users1: any) => {
+  //   //     console.log('user', users1);
+  //   //     return users1.map((user: { name: any }) => user.name);
+  //   //   })
+  //   // );
+
+  //   //how filter works in rxjs
+
+  //   return users$.pipe(map((user1) => user1.filter((user) => !user.isActive)));
+  // }
+
+  // //error handling of rxjs
+
+  // normalizeUserError(
+  //   users$: Observable<UserInterface[]>
+  // ): Observable<string[]> {
+  //   return users$.pipe(
+  //     map((usersdata) => {
+  //       throw new Error('data error');
+
+  //       return usersdata.map((user) => user.name);
+  //     })
+  //     // catchError((err) => {
+  //     //   console.log('error', err);
+  //     //   return of(['error']);
+  //     // })
+  //   );
+  // }
+
+
+
+    usersbehaviour$ = new BehaviorSubject<UserInterface[]>([]);
+  users$ = of<UserInterface[]>([
+    { name: 'Sandesh', age: 23, id: '1', isActive: true },
+    { name: 'Aniket', id: '2', age: 24, isActive: false },
+  ]);
+  ngOnInit() {
+    // from([0, 1, 2, 3, 4])
+    //   .pipe(map((el) => el * 10))
+    //   .subscribe(console.log);
+
+    this.example(mergeMap)();
+    this.fil();
+  }
+
+  example = (operator: any) => () => {
+    from([0, 1, 2, 3, 4])
+      .pipe(operator((x: any) => of(x).pipe(delay(500))))
+      .subscribe(
+        console.log,
+        () => {},
+        () => console.log(`${operator.name} completed`)
+      );
+  };
+
+  fil() {
+    const users$ = of(
+      { name: 'Alice', isActive: true },
+      { name: 'Bob', isActive: false },
+      { name: 'Charlie', isActive: true }
+    );
+
+    users$
+      .pipe(filter((user) => user.isActive)) // Keep only active users
+      .subscribe(console.log);
+  }
